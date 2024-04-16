@@ -3,6 +3,7 @@
 
 
 int main(){
+  Contatos contatos[total];
   int posicao = 0;
   while (1){
     int opcao;
@@ -15,11 +16,10 @@ int main(){
     printf("0 - Sair\n");
     printf("Digite a opção desejada: ");
     scanf("%d" , &opcao);
-
     printf("\n");
 
-    if(opcao == 1){
-      criar_contato();
+    if (opcao == 1) {
+    criar_contato(contatos, &posicao);
     }
 
     else if(opcao == 2){
