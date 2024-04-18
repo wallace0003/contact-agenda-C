@@ -11,7 +11,7 @@ typedef struct{
 
 int criar_contato(Contatos contato[], int *posicao);
 
-int listar_contatos();
+int listar_contatos(Contatos contato[], int *posicao);
 
 int deletar_contato();
 
