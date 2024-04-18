@@ -23,7 +23,7 @@ int main(){
     }
 
     else if(opcao == 2){
-      listar_contatos();
+    listar_contatos(contatos, &posicao);
     }
 
     else if(opcao == 3){
@@ -46,6 +46,7 @@ int main(){
     else{
       printf("Opção inválida!\n");
     }
+    clearBuffer();
   }
   
   
