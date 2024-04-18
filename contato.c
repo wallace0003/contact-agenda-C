@@ -33,9 +33,23 @@ int criar_contato(Contatos contato[], int *posicao) {
     return 1; // Retorna 1 indicando que o contato foi criado com sucesso
 }
 
-int listar_contatos(){
-  printf("Função de listar contatos foi chamada\n");
+int listar_contatos(Contatos contato[], int *posicao){
+  //Verificação de há contatos
+  if(*posicao == 0){
+    printf("Não há contatos");
+    return 0;
+  }
+  //Looping para printar os contatos
+  for(int i=0; i<*posicao; i++){
+    printf("Posição: %d\t", i+1);
+    printf("Nome: %s\t", contato[i].nome);
+    printf("Sobrenome: %s\t", contato[i].sobrenome);
+    printf("Email: %s\t", contato[i].email);
+    printf("Contato: %d\n", contato[i].telefone);
+  }
+  return 1; // Retorna 1 indicando que os contatos foram listados com sucesso
 }
+
 
 int deletar_contato(){
   printf("função de deletar contato foi chamada\n");
