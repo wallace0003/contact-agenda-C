@@ -17,6 +17,7 @@ int main(){
     printf("Digite a opção desejada: ");
     scanf("%d" , &opcao);
     printf("\n");
+    
 
     if (opcao == 1) {
     criar_contato(contatos, &posicao);
@@ -27,7 +28,7 @@ int main(){
     }
 
     else if(opcao == 3){
-      deletar_contato();
+      deletar_contato(contatos, &posicao);
     }
 
     else if(opcao == 4){
@@ -46,7 +47,7 @@ int main(){
     else{
       printf("Opção inválida!\n");
     }
-    clearBuffer();
+    
   }
   
   

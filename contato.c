@@ -3,7 +3,7 @@
 #include "contato.h"
 
 
-//Função para criar contato.
+
 int criar_contato(Contatos contato[], int *posicao) {
     // Verificando se a posição não estendeu o total.
     if (*posicao >= total) {
@@ -15,6 +15,7 @@ int criar_contato(Contatos contato[], int *posicao) {
     clearBuffer();
     printf("Nome: ");
     fgets(contato[*posicao].nome, max_nome, stdin);
+    // Evitando se deixar o /n no final para não dar nenhum bug.
     contato[*posicao].nome[strcspn(contato[*posicao].nome, "\n")] = '\0';
 
     printf("Sobrenome: ");
@@ -36,9 +37,10 @@ int criar_contato(Contatos contato[], int *posicao) {
 int listar_contatos(Contatos contato[], int *posicao){
   //Verificação de há contatos
   if(*posicao == 0){
-    printf("Não há contatos");
+    printf("Não há contatos, impossível listá-los.");
     return 0;
   }
+
   //Looping para printar os contatos
   for(int i=0; i<*posicao; i++){
     printf("Posição: %d\t", i+1);
@@ -51,9 +53,43 @@ int listar_contatos(Contatos contato[], int *posicao){
 }
 
 
-int deletar_contato(){
-  printf("função de deletar contato foi chamada\n");
+int deletar_contato(Contatos contatos[], int *posicao) {
+    // Verificando se há contatos que possam ser excluídos...
+    clearBuffer();
+    if (*posicao == 0) {
+        printf("Não há contatos para serem deletados.\n");
+        return 0;
+    }
+
+    int num_deletar;
+    printf("Digite o número que deseja deletar: ");
+    scanf("%d", &num_deletar);
+
+    int encontrou_contato = 0;
+    for (int i = 0; i < *posicao; i++) {
+        if (contatos[i].telefone == num_deletar) {
+            encontrou_contato = 1;
+            // Deslocando contatos para preencher o espaço do contato excluído
+            for (int j = i; j < *posicao - 1; j++) {
+                strcpy(contatos[j].nome, contatos[j + 1].nome);
+                strcpy(contatos[j].sobrenome, contatos[j + 1].sobrenome);
+                strcpy(contatos[j].email, contatos[j + 1].email);
+                contatos[j].telefone = contatos[j + 1].telefone;
+            }
+            break; // Saia do loop assim que o contato for encontrado e excluído
+        }
+    }
+
+    if (!encontrou_contato) {
+        printf("Número de telefone não encontrado na lista de contatos.\n");
+        return 0;
+    }
+
+    (*posicao)--; // Decrementa o número de contatos
+
+    return 1;
 }
+
 
 int salvar_em_binario(){
   printf("Função de salvar em binario foi chamada\n");
