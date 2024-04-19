@@ -13,7 +13,7 @@ int criar_contato(Contatos contato[], int *posicao);
 
 int listar_contatos(Contatos contato[], int *posicao);
 
-int deletar_contato();
+int deletar_contato(Contatos contato[], int *posicao);
 
 int salvar_em_binario();
 
