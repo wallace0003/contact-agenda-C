@@ -1,6 +1,7 @@
+#include "contato.h"
 #include <stdio.h>
 #include <string.h>
-#include "contato.h"
+
 
 
 
@@ -91,12 +92,34 @@ int deletar_contato(Contatos contatos[], int *posicao) {
 }
 
 
-int salvar_em_binario(){
+int salvar_em_binario(Contatos contato[], int *posicao) {
+
   printf("Função de salvar em binario foi chamada\n");
-}
+  
+  if (*posicao != 0) {
+  
+      char arq[] = {"arquivoBinario.dat"};
+    
+      FILE *arquivo =
+          fopen(arq, "ab"); // Padrao do C para definições de arquivos / ( AB , abre no modo de escrita no binaria)
+      if (arquivo) {
+        // Escrevendo no arquivo
+        fwrite(contato, sizeof(Contatos), *posicao, arquivo);
+        fclose(arquivo);
+        return 0;
+      } else {
+        printf("Ocorreu um erro quando fomos tentar abrir o arquivo !! \n");
+      }
+      
+    }else{
+      printf("Opa... Nao temos contato para serem salvos, tente cadastrar !! \n");
+    }
+  return 1; 
+  }
 
 int carregar_de_binario(){
   printf("Função de carregar de binario foi chamada\n");
+  return 1;
 }
 
 void clearBuffer(){
