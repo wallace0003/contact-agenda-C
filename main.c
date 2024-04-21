@@ -1,11 +1,10 @@
-#include <stdio.h>
 #include "contato.h"
+#include <stdio.h>
 
-
-int main(){
+int main() {
   Contatos contatos[total];
   int posicao = 0;
-  while (1){
+  while (1) {
     int opcao;
     printf("\n");
     printf("1 - Criar contato\n");
@@ -15,40 +14,36 @@ int main(){
     printf("5 - Carregar contatos de arquivo binário\n");
     printf("0 - Sair\n");
     printf("Digite a opção desejada: ");
-    scanf("%d" , &opcao);
+    scanf("%d", &opcao);
     printf("\n");
-    
 
     if (opcao == 1) {
-    criar_contato(contatos, &posicao);
+      criar_contato(contatos, &posicao);
     }
 
-    else if(opcao == 2){
-    listar_contatos(contatos, &posicao);
+    else if (opcao == 2) {
+      listar_contatos(contatos, &posicao);
     }
 
-    else if(opcao == 3){
+    else if (opcao == 3) {
       deletar_contato(contatos, &posicao);
     }
 
-    else if(opcao == 4){
-      salvar_em_binario();
+    else if (opcao == 4) {
+      salvar_em_binario(contatos, &posicao);
     }
 
-    else if (opcao == 5){
+    else if (opcao == 5) {
       carregar_de_binario();
     }
 
-    else if(opcao == 0){
+    else if (opcao == 0) {
       printf("Saindo...\n");
       break;
     }
 
-    else{
+    else {
       printf("Opção inválida!\n");
     }
-    
   }
-  
-  
 }
