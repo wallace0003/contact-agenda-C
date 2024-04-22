@@ -117,9 +117,30 @@ int salvar_em_binario(Contatos contato[], int *posicao) {
         return 1;
 }
 
-int carregar_de_binario(){
-  printf("Função de carregar de binario foi chamada\n");
-  return 1;
+int carregar_de_binario(Contatos contato[], int *posicao) {
+    
+FILE *f = fopen("Contatos.bin", "rb");
+    if(f == NULL){
+        return 0;
+    }
+
+    int qtd = fread(contato, total, sizeof(Contatos), f);
+    if(qtd == 0){
+        return 0;
+    }
+
+    qtd = fread(posicao, 1, sizeof(int), f);
+    if(qtd == 0){
+        return 0;
+    }
+
+    if(fclose(f)){
+        return 0;    
+    }   
+       
+
+    printf("\nTarefa carregada com sucesso!\n");
+    return 1;
 }
 
 void clearBuffer(){
