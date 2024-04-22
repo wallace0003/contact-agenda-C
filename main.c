@@ -34,7 +34,7 @@ int main() {
     }
 
     else if (opcao == 5) {
-      carregar_de_binario();
+      carregar_de_binario(contatos, &posicao);
     }
 
     else if (opcao == 0) {
