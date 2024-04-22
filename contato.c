@@ -94,23 +94,24 @@ int deletar_contato(Contatos contatos[], int *posicao) {
 
 int salvar_em_binario(Contatos contato[], int *posicao) {
     FILE *f = fopen("Contatos.bin", "wb");
-        if(f == NULL)
+        if(f == NULL){
            printf("Erro ao abrir o arquivo para leitura\n");
             return 0;
-
+        }
         int qtd = fwrite(contato, total, sizeof(Contatos), f);
-        if(qtd == 0)
+        if(qtd == 0){
             printf("Erro ao ler os contatos do arquivo\n");
             return 0;
-
+        }
         qtd = fwrite(posicao, 1, sizeof(int), f);
-        if(qtd == 0)
+        if(qtd == 0){
             printf("Erro ao ler a posição do arquivo\n");
             return 0;
-
-        if(fclose(f))
+        }
+        if(fclose(f)){
             printf("Erro ao fechar o arquivo após a leitura\n");
             return 0;
+        }
         
         printf("\nArquivo foi salvo em arquivo binario com o nome de - Contatos.bin !! \n");
         return 1;
