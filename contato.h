@@ -6,7 +6,7 @@ typedef struct {
   char nome[max_nome];
   char sobrenome[max_nome];
   char email[max_email];
-  int telefone;s
+  int telefone;
 } Contatos;
 
 int criar_contato(Contatos contato[], int *posicao);

@@ -93,29 +93,28 @@ int deletar_contato(Contatos contatos[], int *posicao) {
 
 
 int salvar_em_binario(Contatos contato[], int *posicao) {
+    FILE *f = fopen("Contatos.bin", "wb");
+        if(f == NULL)
+           printf("Erro ao abrir o arquivo para leitura\n");
+            return 0;
 
-  printf("Função de salvar em binario foi chamada\n");
-  
-  if (*posicao != 0) {
-  
-      char arq[] = {"arquivoBinario.dat"};
-    
-      FILE *arquivo =
-          fopen(arq, "ab"); // Padrao do C para definições de arquivos / ( AB , abre no modo de escrita no binaria)
-      if (arquivo) {
-        // Escrevendo no arquivo
-        fwrite(contato, sizeof(Contatos), *posicao, arquivo);
-        fclose(arquivo);
-        return 0;
-      } else {
-        printf("Ocorreu um erro quando fomos tentar abrir o arquivo !! \n");
-      }
-      
-    }else{
-      printf("Opa... Nao temos contato para serem salvos, tente cadastrar !! \n");
-    }
-  return 1; 
-  }
+        int qtd = fwrite(contato, total, sizeof(Contatos), f);
+        if(qtd == 0)
+            printf("Erro ao ler os contatos do arquivo\n");
+            return 0;
+
+        qtd = fwrite(posicao, 1, sizeof(int), f);
+        if(qtd == 0)
+            printf("Erro ao ler a posição do arquivo\n");
+            return 0;
+
+        if(fclose(f))
+            printf("Erro ao fechar o arquivo após a leitura\n");
+            return 0;
+        
+        printf("\nArquivo foi salvo em arquivo binario com o nome de - Contatos.bin !! \n");
+        return 1;
+}
 
 int carregar_de_binario(){
   printf("Função de carregar de binario foi chamada\n");
