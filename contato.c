@@ -1,9 +1,17 @@
 #include "contato.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
-
-
+int contem_apenas_letras(const char *str) {
+    while (*str) {
+        if (!isalpha(*str) && *str != ' ') { // Verifica se o caractere não é uma letra ou espaço
+            return 0;
+        }
+        str++;
+    }
+    return 1;
+}
 
 int criar_contato(Contatos contato[], int *posicao) {
     // Verificando se a posição não estendeu o total.
@@ -16,21 +24,34 @@ int criar_contato(Contatos contato[], int *posicao) {
     clearBuffer();
     printf("Nome: ");
     fgets(contato[*posicao].nome, max_nome, stdin);
-    // Evitando se deixar o /n no final para não dar nenhum bug.
+    // Removendo o caractere de nova linha, se presente
     contato[*posicao].nome[strcspn(contato[*posicao].nome, "\n")] = '\0';
+    // Verificando se o nome contém apenas letras
+    if (!contem_apenas_letras(contato[*posicao].nome)) {
+        printf("O nome deve conter apenas letras.\n");
+        return 0;
+    }
 
     printf("Sobrenome: ");
     fgets(contato[*posicao].sobrenome, max_nome, stdin);
     contato[*posicao].sobrenome[strcspn(contato[*posicao].sobrenome, "\n")] = '\0';
+    // Verificando se o sobrenome contém apenas letras
+    if (!contem_apenas_letras(contato[*posicao].sobrenome)) {
+        printf("O sobrenome deve conter apenas letras.\n");
+        return 0;
+    }
 
     printf("E-mail: ");
     fgets(contato[*posicao].email, max_email, stdin);
+
     contato[*posicao].email[strcspn(contato[*posicao].email, "\n")] = '\0';
 
     printf("Número: ");
     scanf("%d", &contato[*posicao].telefone);
 
     (*posicao)++; // Incrementa a posição
+
+    printf("Contato adicionado com sucesso!\n");
 
     return 1; // Retorna 1 indicando que o contato foi criado com sucesso
 }
@@ -88,6 +109,8 @@ int deletar_contato(Contatos contatos[], int *posicao) {
 
     (*posicao)--; // Decrementa o número de contatos
 
+    printf("Contato deletado com sucesso.\n");
+
     return 1;
 }
 
@@ -113,7 +136,7 @@ int salvar_em_binario(Contatos contato[], int *posicao) {
             return 0;
         }
         
-        printf("\nArquivo foi salvo em arquivo binario com o nome de - Contatos.bin !! \n");
+        printf("\nArquivo foi salvo em arquivo binario com o nome: 'Contatos.bin'. \n");
         return 1;
 }
 
@@ -121,25 +144,29 @@ int carregar_de_binario(Contatos contato[], int *posicao) {
     
 FILE *f = fopen("Contatos.bin", "rb");
     if(f == NULL){
+        printf("Erro ao abrir o arquivo\n");
         return 0;
     }
 
     int qtd = fread(contato, total, sizeof(Contatos), f);
     if(qtd == 0){
+        printf("Erro ao ler os contatos do arquivo\n");
         return 0;
     }
 
     qtd = fread(posicao, 1, sizeof(int), f);
     if(qtd == 0){
+        printf("Erro ao ler a posição do arquivo\n");
         return 0;
     }
 
     if(fclose(f)){
+        printf("Erro ao fechar o arquivo\n");
         return 0;    
     }   
        
 
-    printf("\nTarefa carregada com sucesso!\n");
+    printf("\nContatos carregados com sucesso!\n");
     return 1;
 }
 
