@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 int contem_apenas_letras(const char *str) {
   if (*str == '\0') {
       return 0; 
@@ -51,7 +52,7 @@ int criar_contato(Contatos contato[], int *posicao) {
 
   contato[*posicao].email[strcspn(contato[*posicao].email, "\n")] = '\0';
 
-  printf("Número: ");
+  printf("Número: (Ex: 11987345601): ");
   scanf("%d", &contato[*posicao].telefone);
 
   (*posicao)++; // Incrementa a posição
@@ -175,6 +176,5 @@ int carregar_de_binario(Contatos contato[], int *posicao) {
 
 void clearBuffer() {
   int c;
-  while ((c = getchar()) != '\n' && c != EOF)
-    ;
+  while ((c = getchar()) != '\n' && c != EOF);
 }
