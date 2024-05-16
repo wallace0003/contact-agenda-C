@@ -6,6 +6,7 @@ int main() {
   Contatos ContatosTrabalho[total];
   int posicaoPessoais = 0;
   int posicaoTrabalho = 0;
+
   while (1) {
     int opcao;
     int escolhaContatos;
@@ -21,8 +22,10 @@ int main() {
     printf("\n");
 
     if (opcao == 1) {
+        
       printf("1 -> Agenda pessoal\n");
       printf("2 -> Agenda de trabalho\n");
+      printf("Opção: ");
       scanf("%d", &escolhaContatos);
       if (escolhaContatos == 1){
           criar_contato(contatosPessoais, &posicaoPessoais);
@@ -33,11 +36,14 @@ int main() {
       else{
           printf("Opção inválida\n");
       }
+        
     }
 
     else if (opcao == 2) {
+        
         printf("1 -> Agenda pessoal\n");
         printf("2 -> Agenda de trabalho\n");
+        printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
             listar_contatos(contatosPessoais, &posicaoPessoais);
@@ -49,11 +55,14 @@ int main() {
         else{
             printf("Opção inválida\n");
         }
+        
     }
 
     else if (opcao == 3) {
+        
       printf("1 -> Agenda pessoal\n");
       printf("2 -> Agenda de trabalho\n");
+      printf("Opção: ");
       scanf("%d", &escolhaContatos);
       if (escolhaContatos == 1){
           deletar_contato(contatosPessoais, &posicaoPessoais);
@@ -65,11 +74,14 @@ int main() {
       else{
           printf("Opção inválida\n");
       }
+        
     }
 
     else if (opcao == 4) {
+        
         printf("1 -> Agenda pessoal\n");
         printf("2 -> Agenda de trabalho\n");
+        printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
             salvar_em_binario(contatosPessoais, &posicaoPessoais);
@@ -88,8 +100,10 @@ int main() {
     }
 
     else if (opcao == 5) {
+        
         printf("1 -> Agenda pessoal\n");
         printf("2 -> Agenda de trabalho\n");
+        printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
             carregar_de_binario(contatosPessoais, &posicaoPessoais);
