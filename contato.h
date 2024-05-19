@@ -8,7 +8,7 @@ typedef struct {
   char nome[max_nome];
   char sobrenome[max_nome];
   char email[max_email];
-  int telefone;
+  unsigned long long telefone;
 } Contatos;
 
 
