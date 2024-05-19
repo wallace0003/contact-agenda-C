@@ -47,8 +47,19 @@ int criar_contato(Contatos contato[], int *posicao) {
     return 0;
   }
 
+int emailValido = 0;
+
+while(emailValido == 0){
   printf("E-mail: ");
   fgets(contato[*posicao].email, max_email, stdin);
+  if ( strchr(contato[*posicao].email, '@') == NULL ) {
+     printf("Digite um email valido, com o caractere @");
+     fgets(contato[*posicao].email, max_email, stdin);
+  }else{
+    emailValido = 1;
+  }
+}
+  
 
   contato[*posicao].email[strcspn(contato[*posicao].email, "\n")] = '\0';
 
