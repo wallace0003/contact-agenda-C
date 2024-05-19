@@ -25,42 +25,53 @@ int criar_contato(Contatos contato[], int *posicao) {
     return 0;
   }
 
-  // Pedindo para o usuário os dados e salvando-os no struct
-  clearBuffer();
-  printf("Nome: ");
-  fgets(contato[*posicao].nome, max_nome, stdin);
-  // Removendo o caractere de nova linha, se presente
-  contato[*posicao].nome[strcspn(contato[*posicao].nome, "\n")] = '\0';
-  // Verificando se o nome contém apenas letras
-  if (!contem_apenas_letras(contato[*posicao].nome)) {
-    printf("O nome não pode estar vazio e só pode conter apenas letras\n");
-    return 0;
-  }
+  Contatos novo_contato;
 
-  printf("Sobrenome: ");
-  fgets(contato[*posicao].sobrenome, max_nome, stdin);
-  contato[*posicao].sobrenome[strcspn(contato[*posicao].sobrenome, "\n")] =
-      '\0';
-  // Verificando se o sobrenome contém apenas letras
-  if (!contem_apenas_letras(contato[*posicao].sobrenome)) {
-    printf("O sobrenome nao pode estar vazi e deve conter apenas letras.\n");
-    return 0;
-  }
+    // Pedindo para o usuário os dados e salvando-os no struct
+    clearBuffer();
+    printf("Nome: ");
+    fgets(novo_contato.nome, max_nome, stdin);
+    // Removendo o caractere de nova linha, se presente
+    novo_contato.nome[strcspn(novo_contato.nome, "\n")] = '\0';
+    // Verificando se o nome contém apenas letras
+    if (!contem_apenas_letras(novo_contato.nome)) {
+        printf("O nome não pode estar vazio e só pode conter apenas letras\n");
+        return 0;
+    }
 
-  printf("E-mail: ");
-  fgets(contato[*posicao].email, max_email, stdin);
+    printf("Sobrenome: ");
+    fgets(novo_contato.sobrenome, max_nome, stdin);
+    novo_contato.sobrenome[strcspn(novo_contato.sobrenome, "\n")] = '\0';
+    // Verificando se o sobrenome contém apenas letras
+    if (!contem_apenas_letras(novo_contato.sobrenome)) {
+        printf("O sobrenome não pode estar vazio e deve conter apenas letras.\n");
+        return 0;
+    }
 
-  contato[*posicao].email[strcspn(contato[*posicao].email, "\n")] = '\0';
+    printf("E-mail: ");
+    fgets(novo_contato.email, max_email, stdin);
+    novo_contato.email[strcspn(novo_contato.email, "\n")] = '\0';
 
-  printf("Número: (Ex: 11987345601): ");
-  scanf("%d", &contato[*posicao].telefone);
+    printf("Número: (Ex: 11987345601): ");
+    scanf("%d", &novo_contato.telefone);
+    
+    // Verificando se já existe um contato com o mesmo telefone
+    for (int i = 0; i < *posicao; i++) {
+        if (contato[i].telefone == novo_contato.telefone) {
+            printf("Já existe um contato com este número de telefone.\n");
+            return 0;
+        }
+    }
 
-  (*posicao)++; // Incrementa a posição
+    //Armazena no array correto
+    contato[*posicao] = novo_contato;
+    (*posicao)++; // Incrementa a posição
 
-  printf("Contato adicionado com sucesso!\n");
+    printf("Contato adicionado com sucesso!\n");
 
-  return 1; // Retorna 1 indicando que o contato foi criado com sucesso
+    return 1; // Retorna 1 indicando que o contato foi criado com sucesso
 }
+
 
 int listar_contatos(Contatos contato[], int *posicao) {
   // Verificação de há contatos
