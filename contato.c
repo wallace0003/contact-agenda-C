@@ -141,8 +141,8 @@ int deletar_contato(Contatos contatos[], int *posicao) {
   return 1;
 }
 
-int salvar_em_binario(Contatos contato[], int *posicao) {
-  FILE *f = fopen("Contatos.bin", "wb");
+int salvar_binario_pessoais(Contatos contato[], int *posicao) {
+  FILE *f = fopen("Contatos_pessoais.bin", "wb");
   if (f == NULL) {
     printf("Erro ao abrir o arquivo para leitura\n");
     return 0;
@@ -163,13 +163,13 @@ int salvar_em_binario(Contatos contato[], int *posicao) {
   }
 
   printf(
-      "\nArquivo foi salvo em arquivo binario com o nome: 'Contatos.bin'. \n");
+      "\nArquivo foi salvo em arquivo binario com o nome: 'Contatos_pessoais.bin'. \n");
   return 1;
 }
 
-int carregar_de_binario(Contatos contato[], int *posicao) {
+int carregar_binario_pessoais(Contatos contato[], int *posicao) {
 
-  FILE *f = fopen("Contatos.bin", "rb");
+  FILE *f = fopen("Contatos_pessoais.bin", "rb");
   if (f == NULL) {
     printf("Erro ao abrir o arquivo\n");
     return 0;
@@ -195,6 +195,63 @@ int carregar_de_binario(Contatos contato[], int *posicao) {
   printf("\nContatos carregados com sucesso!\n");
   return 1;
 }
+
+int salvar_binario_trabalho(Contatos contato[], int *posicao) {
+  FILE *f = fopen("Contatos_trabalho.bin", "wb");
+  if (f == NULL) {
+    printf("Erro ao abrir o arquivo para leitura\n");
+    return 0;
+  }
+  int qtd = fwrite(contato, total, sizeof(Contatos), f);
+  if (qtd == 0) {
+    printf("Erro ao ler os contatos do arquivo\n");
+    return 0;
+  }
+  qtd = fwrite(posicao, 1, sizeof(int), f);
+  if (qtd == 0) {
+    printf("Erro ao ler a posição do arquivo\n");
+    return 0;
+  }
+  if (fclose(f)) {
+    printf("Erro ao fechar o arquivo após a leitura\n");
+    return 0;
+  }
+
+  printf(
+      "\nArquivo foi salvo em arquivo binario com o nome: 'Contatos_trabalho.bin'. \n");
+  return 1;
+}
+
+int carregar_binario_trabalho(Contatos contato[], int *posicao) {
+
+  FILE *f = fopen("Contatos_trabalho.bin", "rb");
+  if (f == NULL) {
+    printf("Erro ao abrir o arquivo\n");
+    return 0;
+  }
+
+  int qtd = fread(contato, total, sizeof(Contatos), f);
+  if (qtd == 0) {
+    printf("Erro ao ler os contatos do arquivo\n");
+    return 0;
+  }
+
+  qtd = fread(posicao, 1, sizeof(int), f);
+  if (qtd == 0) {
+    printf("Erro ao ler a posição do arquivo\n");
+    return 0;
+  }
+
+  if (fclose(f)) {
+    printf("Erro ao fechar o arquivo\n");
+    return 0;
+  }
+
+  printf("\nContatos carregados com sucesso!\n");
+  return 1;
+}
+
+
 
 void clearBuffer() {
   int c;
