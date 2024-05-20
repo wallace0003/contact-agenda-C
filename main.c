@@ -11,20 +11,21 @@ int main() {
     int opcao;
     int escolhaContatos;
     printf("\n");
-    printf("1 - Criar contato\n");
-    printf("2 - Listar contatos\n");
-    printf("3 - Deletar contato\n");
-    printf("4 - Salvar contatos em arquivo binário\n");
-    printf("5 - Carregar contatos de arquivo binário\n");
-    printf("0 - Sair\n");
+    printf("1 - Criar contato.\n");
+    printf("2 - Listar contatos.\n");
+    printf("3 - Deletar contato.\n");
+    printf("4 - Salvar contatos em arquivo binário.\n");
+    printf("5 - Carregar contatos de arquivo binário.\n");
+    printf("6 - Alterar contato.\n");
+    printf("0 - Sair.\n");
     printf("Digite a opção desejada: ");
     scanf("%d", &opcao);
     printf("\n");
 
     if (opcao == 1) {
         
-      printf("1 -> Agenda pessoal\n");
-      printf("2 -> Agenda de trabalho\n");
+      printf("1 -> Agenda pessoal.\n");
+      printf("2 -> Agenda de trabalho.\n");
       printf("Opção: ");
       scanf("%d", &escolhaContatos);
       if (escolhaContatos == 1){
@@ -34,15 +35,15 @@ int main() {
           criar_contato(ContatosTrabalho, &posicaoTrabalho);
       }
       else{
-          printf("Opção inválida\n");
+          printf("Opção inválida.\n");
       }
         
     }
 
     else if (opcao == 2) {
         
-        printf("1 -> Agenda pessoal\n");
-        printf("2 -> Agenda de trabalho\n");
+        printf("1 -> Agenda pessoal.\n");
+        printf("2 -> Agenda de trabalho.\n");
         printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
@@ -53,15 +54,15 @@ int main() {
         }
 
         else{
-            printf("Opção inválida\n");
+            printf("Opção inválida.\n");
         }
         
     }
 
     else if (opcao == 3) {
         
-      printf("1 -> Agenda pessoal\n");
-      printf("2 -> Agenda de trabalho\n");
+      printf("1 -> Agenda pessoal.\n");
+      printf("2 -> Agenda de trabalho.\n");
       printf("Opção: ");
       scanf("%d", &escolhaContatos);
       if (escolhaContatos == 1){
@@ -72,15 +73,15 @@ int main() {
       }
 
       else{
-          printf("Opção inválida\n");
+          printf("Opção inválida.\n");
       }
         
     }
 
     else if (opcao == 4) {
         
-        printf("1 -> Agenda pessoal\n");
-        printf("2 -> Agenda de trabalho\n");
+        printf("1 -> Agenda pessoal.\n");
+        printf("2 -> Agenda de trabalho.\n");
         printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
@@ -91,7 +92,7 @@ int main() {
         }
 
         else{
-            printf("Opção inválida\n");
+            printf("Opção inválida.\n");
         }
 
 
@@ -101,8 +102,8 @@ int main() {
 
     else if (opcao == 5) {
         
-        printf("1 -> Agenda pessoal\n");
-        printf("2 -> Agenda de trabalho\n");
+        printf("1 -> Agenda pessoal.\n");
+        printf("2 -> Agenda de trabalho.\n");
         printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
@@ -112,21 +113,36 @@ int main() {
             carregar_binario_trabalho(ContatosTrabalho, &posicaoTrabalho);
         }
         else{
-            printf("Opção inválida\n");
+            printf("Opção inválida.\n");
         }
+}
 
-      
-    }
+        else if(opcao == 6){
 
-    else if (opcao == 0) {
-        
+            printf("1 -> Agenda pessoal.\n");
+            printf("2 -> Agenda de trabalho.\n");
+            printf("Opção: ");
+            scanf("%d", &escolhaContatos);
+            if (escolhaContatos == 1){
+                alterar_contato(contatosPessoais, &posicaoPessoais);
+            }
+            else if (escolhaContatos == 2){
+                alterar_contato(ContatosTrabalho, &posicaoTrabalho);
+            }
+            else{
+                printf("Opção inválida.\n");
+            }
+            
+}
+
+    else if (opcao == 0) {  
       printf("Saindo...\n");
       break;
     }
-
+        
     else {
       printf("Opção inválida!\n");
     }
-  }
-    
+      
+  } 
 }
