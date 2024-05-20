@@ -110,7 +110,7 @@ int deletar_contato(Contatos contatos[], int *posicao) {
     return 0;
   }
 
-  int num_deletar;
+  long long num_deletar;
   printf("Digite o número que deseja deletar: ");
   scanf("%llu", &num_deletar);
 
@@ -248,6 +248,38 @@ int carregar_binario_trabalho(Contatos contato[], int *posicao) {
   }
 
   printf("\nContatos carregados com sucesso!\n");
+  return 1;
+}
+
+int alterar_contato(Contatos contato[], int *posicao){
+  if(*posicao == 0){
+    printf("Ìmpossível alterar contato, pois não há nenhum contato cadastrado.\n");
+    return 0;
+  }
+
+  long long num_alterar;
+  long long novo_numero;
+  printf("Digite o número que deseja alterar: ");
+  scanf("%llu", &num_alterar);
+
+  int encontrou_contato = 0;
+
+  for (int i = 0; i < *posicao; i++){
+    if (contato[i].telefone == num_alterar){
+      printf("Novo número: ");
+      scanf("%llu", &novo_numero);
+      contato[i].telefone = novo_numero;
+      encontrou_contato += 1;
+      break;
+    }
+  }
+
+  if(encontrou_contato == 0){
+    printf("O contato: %llu não foi encontrado.\n", num_alterar);
+    return 0;
+  }
+
+  printf("Contato alterado com sucesso!\n");
   return 1;
 }
 

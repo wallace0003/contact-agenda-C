@@ -27,6 +27,8 @@ int salvar_binario_trabalho(Contatos contato[], int *posicao);
 
 int carregar_binario_trabalho(Contatos contato[], int *posicao);
 
+int alterar_contato(Contatos contato[], int *posicao);
+
 int contem_apenas_letras(const char *str);
 
 void clearBuffer();
