@@ -19,9 +19,13 @@ int listar_contatos(Contatos contato[], int *posicao);
 
 int deletar_contato(Contatos contato[], int *posicao);
 
-int salvar_em_binario(Contatos contato[], int *posicao);
+int salvar_binario_pessoais(Contatos contato[], int *posicao);
 
-int carregar_de_binario(Contatos contato[], int *posicao);
+int carregar_binario_pessoais(Contatos contato[], int *posicao);
+
+int salvar_binario_trabalho(Contatos contato[], int *posicao);
+
+int carregar_binario_trabalho(Contatos contato[], int *posicao);
 
 int contem_apenas_letras(const char *str);
 

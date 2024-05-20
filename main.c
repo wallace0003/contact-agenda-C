@@ -84,10 +84,10 @@ int main() {
         printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
-            salvar_em_binario(contatosPessoais, &posicaoPessoais);
+            salvar_binario_pessoais(contatosPessoais, &posicaoPessoais);
         }
         else if (escolhaContatos == 2){
-            salvar_em_binario(ContatosTrabalho, &posicaoTrabalho);
+            salvar_binario_trabalho(ContatosTrabalho, &posicaoTrabalho);
         }
 
         else{
@@ -106,10 +106,10 @@ int main() {
         printf("Opção: ");
         scanf("%d", &escolhaContatos);
         if (escolhaContatos == 1){
-            carregar_de_binario(contatosPessoais, &posicaoPessoais);
+            carregar_binario_pessoais(contatosPessoais, &posicaoPessoais);
         }
         else if (escolhaContatos == 2){
-            carregar_de_binario(ContatosTrabalho, &posicaoTrabalho);
+            carregar_binario_trabalho(ContatosTrabalho, &posicaoTrabalho);
         }
         else{
             printf("Opção inválida\n");
@@ -119,6 +119,7 @@ int main() {
     }
 
     else if (opcao == 0) {
+        
       printf("Saindo...\n");
       break;
     }
@@ -127,4 +128,5 @@ int main() {
       printf("Opção inválida!\n");
     }
   }
+    
 }
