@@ -251,38 +251,76 @@ int carregar_binario_trabalho(Contatos contato[], int *posicao) {
   return 1;
 }
 
-int alterar_contato(Contatos contato[], int *posicao){
-  if(*posicao == 0){
-    printf("Ìmpossível alterar contato, pois não há nenhum contato cadastrado.\n");
-    return 0;
-  }
 
-  long long num_alterar;
-  long long novo_numero;
-  printf("Digite o número que deseja alterar: ");
-  scanf("%llu", &num_alterar);
-
-  int encontrou_contato = 0;
-
-  for (int i = 0; i < *posicao; i++){
-    if (contato[i].telefone == num_alterar){
-      printf("Novo número: ");
-      scanf("%llu", &novo_numero);
-      contato[i].telefone = novo_numero;
-      encontrou_contato += 1;
-      break;
+int alterar_contato(Contatos contato[], int *posicao) {
+    if (*posicao == 0) {
+        printf("Impossível alterar contato, pois não há nenhum contato cadastrado.\n");
+        return 0;
     }
-  }
 
-  if(encontrou_contato == 0){
-    printf("O contato: %llu não foi encontrado.\n", num_alterar);
-    return 0;
-  }
+    long long num_alterar;
+    long long novo_numero;
+    char novo_nome[max_nome];
+    char novo_sobrenome[max_nome];
+    char novo_email[max_email];
 
-  printf("Contato alterado com sucesso!\n");
-  return 1;
+    printf("Digite o número que deseja alterar: ");
+    scanf("%lld", &num_alterar);
+    clearBuffer(); 
+
+    int encontrou_contato = 0;
+
+    for (int i = 0; i < *posicao; i++) {
+        if (contato[i].telefone == num_alterar) {
+            printf("Novo número: ");
+            scanf("%lld", &novo_numero);
+            clearBuffer();  
+
+            for (int j = 0; j < *posicao; j++) {
+                if (contato[j].telefone == novo_numero && j != i) {
+                    printf("Já existe um contato com este número de telefone.\n");
+                    return 0;
+                }
+            }
+
+            printf("Novo nome: ");
+            fgets(novo_nome, max_nome, stdin);
+            novo_nome[strcspn(novo_nome, "\n")] = '\0';  // Remover o caractere de nova linha
+
+            printf("Novo sobrenome: ");
+            fgets(novo_sobrenome, max_nome, stdin);
+            novo_sobrenome[strcspn(novo_sobrenome, "\n")] = '\0';  // Remover o caractere de nova linha
+
+            int emailValido = 0;
+            while (!emailValido) {
+                printf("Novo E-mail: ");
+                fgets(novo_email, max_email, stdin);
+                novo_email[strcspn(novo_email, "\n")] = '\0';  // Remover o caractere de nova linha
+
+                
+                if (strchr(novo_email, '@') == NULL) {
+                    printf("Digite um email válido, com o caractere '@'.\n");
+                } else {
+                    emailValido = 1;
+                }
+            }
+            strcpy(contato[i].nome, novo_nome);
+            strcpy(contato[i].sobrenome, novo_sobrenome);
+            strcpy(contato[i].email, novo_email);
+            contato[i].telefone = novo_numero;
+            encontrou_contato = 1;
+            break;
+        }
+    }
+
+    if (!encontrou_contato) {
+        printf("O contato: %lld não foi encontrado.\n", num_alterar);
+        return 0;
+    }
+
+    printf("Contato alterado com sucesso!\n");
+    return 1;
 }
-
 
 
 void clearBuffer() {
