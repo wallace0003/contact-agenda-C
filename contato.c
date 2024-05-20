@@ -57,8 +57,8 @@ int criar_contato(Contatos contato[], int *posicao) {
         novo_contato.email[strcspn(novo_contato.email, "\n")] = '\0'; // Removendo o caractere de nova linha
 
         // Verificando se o e-mail contém '@'
-        if (strchr(novo_contato.email, '@') == NULL) {
-            printf("Digite um email válido, com o caractere '@'.\n");
+        if (strchr(novo_contato.email, '@.') == NULL) {
+            printf("Digite um email válido, com os caractere '@.'.\n");
         } else {
             emailValido = 1;
         }
@@ -298,8 +298,8 @@ int alterar_contato(Contatos contato[], int *posicao) {
                 novo_email[strcspn(novo_email, "\n")] = '\0';  // Remover o caractere de nova linha
 
                 
-                if (strchr(novo_email, '@') == NULL) {
-                    printf("Digite um email válido, com o caractere '@'.\n");
+                if (strchr(novo_email, '@.') == NULL) {
+                    printf("Digite um email válido, com o caractere '@.'.\n");
                 } else {
                     emailValido = 1;
                 }
