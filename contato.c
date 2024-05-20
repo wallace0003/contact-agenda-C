@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include <locale.h>
 
 
 int contem_apenas_letras(const char *str) {
@@ -18,21 +19,20 @@ int contem_apenas_letras(const char *str) {
 }
 
 int criar_contato(Contatos contato[], int *posicao) {
-  // Verificando se a posição não estendeu o total.
-  if (*posicao >= total) {
-    printf("Não é possível adicionar mais contatos, sua lista de contatos está "
-           "cheia.\n");
-    return 0;
-  }
+    // Verificando se a posição não excedeu o total.
+    if (*posicao >= total) {
+        printf("Não é possível adicionar mais contatos, sua lista de contatos está cheia.\n");
+        return 0;
+    }
 
-  Contatos novo_contato;
+    Contatos novo_contato;
 
     // Pedindo para o usuário os dados e salvando-os no struct
     clearBuffer();
     printf("Nome: ");
     fgets(novo_contato.nome, max_nome, stdin);
-    // Removendo o caractere de nova linha, se presente
-    novo_contato.nome[strcspn(novo_contato.nome, "\n")] = '\0';
+    novo_contato.nome[strcspn(novo_contato.nome, "\n")] = '\0'; // Removendo o caractere de nova linha
+
     // Verificando se o nome contém apenas letras
     if (!contem_apenas_letras(novo_contato.nome)) {
         printf("O nome não pode estar vazio e só pode conter apenas letras\n");
@@ -41,30 +41,32 @@ int criar_contato(Contatos contato[], int *posicao) {
 
     printf("Sobrenome: ");
     fgets(novo_contato.sobrenome, max_nome, stdin);
-    novo_contato.sobrenome[strcspn(novo_contato.sobrenome, "\n")] = '\0';
+    novo_contato.sobrenome[strcspn(novo_contato.sobrenome, "\n")] = '\0'; // Removendo o caractere de nova linha
+
     // Verificando se o sobrenome contém apenas letras
     if (!contem_apenas_letras(novo_contato.sobrenome)) {
         printf("O sobrenome não pode estar vazio e deve conter apenas letras.\n");
         return 0;
     }
 
-int emailValido = 0;
+    int emailValido = 0;
 
-while(emailValido == 0){
-  printf("E-mail: ");
-  fgets(contato[*posicao].email, max_email, stdin);
-  if ( strchr(contato[*posicao].email, '@') == NULL ) {
-     printf("Digite um email valido, com o caractere @");
-     fgets(contato[*posicao].email, max_email, stdin);
-  }else{
-    emailValido = 1;
-  }
-}
-  
+    while (emailValido == 0) {
+        printf("E-mail: ");
+        fgets(novo_contato.email, max_email, stdin);
+        novo_contato.email[strcspn(novo_contato.email, "\n")] = '\0'; // Removendo o caractere de nova linha
+
+        // Verificando se o e-mail contém '@'
+        if (strchr(novo_contato.email, '@') == NULL) {
+            printf("Digite um email válido, com o caractere '@'.\n");
+        } else {
+            emailValido = 1;
+        }
+    }
 
     printf("Número: (Ex: 11987345601): ");
-    scanf("%d", &novo_contato.telefone);
-    
+    scanf("%llu", &novo_contato.telefone);
+
     // Verificando se já existe um contato com o mesmo telefone
     for (int i = 0; i < *posicao; i++) {
         if (contato[i].telefone == novo_contato.telefone) {
@@ -73,7 +75,7 @@ while(emailValido == 0){
         }
     }
 
-    //Armazena no array correto
+    // Armazena no array correto
     contato[*posicao] = novo_contato;
     (*posicao)++; // Incrementa a posição
 
@@ -81,7 +83,6 @@ while(emailValido == 0){
 
     return 1; // Retorna 1 indicando que o contato foi criado com sucesso
 }
-
 
 int listar_contatos(Contatos contato[], int *posicao) {
   // Verificação de há contatos
@@ -96,7 +97,7 @@ int listar_contatos(Contatos contato[], int *posicao) {
     printf("Nome: %s\t", contato[i].nome);
     printf("Sobrenome: %s\t", contato[i].sobrenome);
     printf("Email: %s\t", contato[i].email);
-    printf("Contato: %d\n", contato[i].telefone);
+    printf("Contato: %llu\n", contato[i].telefone);
   }
   return 1; // Retorna 1 indicando que os contatos foram listados com sucesso
 }
@@ -111,7 +112,7 @@ int deletar_contato(Contatos contatos[], int *posicao) {
 
   int num_deletar;
   printf("Digite o número que deseja deletar: ");
-  scanf("%d", &num_deletar);
+  scanf("%llu", &num_deletar);
 
   int encontrou_contato = 0;
   for (int i = 0; i < *posicao; i++) {
